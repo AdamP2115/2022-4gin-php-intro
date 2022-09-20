@@ -1,12 +1,25 @@
 <?php
 $content = file_get_contents('https://www.loripsum.net/api');
 $array = explode(' ', $content);
-
-echo("Slowa zawierajace litere e: ");
-echo "<br>";
-foreach($array as $slowa_z_e){
-    if(preg_match('/\b(\w*e\w*)\b/', $slowa_z_e, $match) == true){
-    echo "$match[0] </br>";
-    }
+$e = 1;
+echo "<table>";
+foreach($array as $word){
+    if($e<=4){
+    if ($e%4==1){
+        echo "<tr><th>$word</th>";
+    } else if ($e%4==0){
+        echo "<th>$word</th></tr>";
+    } else {
+        echo "<th>$word</th>";
+    }} else {
+    if ($e%4==1){
+        echo "<tr><td>$word</td>";
+    } else if ($e%4==0){
+        echo "<td>$word</td></tr>";
+    } else {
+        echo "<td>$word</td>";
+    }}
+    $e ++;
 }
+echo "</table>";
 ?>
