@@ -25,16 +25,25 @@ function renderHTMLTable($array, $kolumny, $liczba, $znajdz){
     };
     echo "</table>";
 };
-renderHTMLTable($array, $kolumny, $_POST["liczba"], $_POST["znajdz"]);
+renderHTMLTable($array, $kolumny, 5, "a");
 
-function renderCSV($array, $filename = "export.csv", $delimiter=";") {
-    header('Content-Type: application/csv');
-    header('Content-Disposition: attachment; filename="'.$filename.'";');
+// function renderCSV($array, $kolumny){
+//     $delimiter = ',';
+//     $enclosure = '"';
+    
+//     $file = fopen('file.csv', 'w+');
+//     foreach ($array as $data_line) {
+//     fputcsv($file, $data_line, $delimiter, $enclosure);
+//     }
 
-    $f = fopen('php://output', 'w');
-
-    foreach ($array as $line) {
-        fputcsv($f, $line, $delimiter);
-    }
-}
+//     $data_read="";
+//     rewind($file);
+    
+//     while (!feof($file)) {
+//         $data_read .= fread($file, 8192); 
+//     }
+//     fclose($file);
+//     echo $data_read;
+// };
+// renderCSV()
 ?>
