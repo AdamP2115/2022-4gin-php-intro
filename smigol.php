@@ -1,5 +1,5 @@
 <?php
-$content = file_get_contents('https://www.loripsum.net/api');
+$content = file_get_contents('lorem.txt');
 $array = explode(' ', $content);
 $kolumny = 1;
 function renderHTMLTable($array, $kolumny, $liczba, $znajdz){

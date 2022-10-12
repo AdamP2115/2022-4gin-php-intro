@@ -2,18 +2,35 @@
 require_once "tableTool.interface.php";
 
 class tableTool implements tableToolInterface{
+    var $table_data;
     public function __construct($data)
     {
         $this->table_data=$data;
     }
-    public function renderHTMLTable($kolumny){
+    public function SortSearch($filterString) {
+        if("" == trim($filterString)){
+          sort($this->table_data, SORT_NATURAL | SORT_FLAG_CASE);
+          foreach($this->table_data as $slowo){
+                $result[] = $slowo;
+          }
+          return $result;
+        } else {
+          foreach($this->table_data as $slowo){
+            sort($this->table_data, SORT_NATURAL | SORT_FLAG_CASE);
+            if( strpos($slowo, $filterString) !== false){
+                $result[] = $slowo;
+            }
+          }
+          return $result;
+      }
+      }
+    public function renderHTMLTable($kolumny, $filterString = ''){
+        $table = '';
         $table .= '<table>';
-        $kolumny = 1;
         foreach($this->table_data as $slowo){
-            if(preg_match('/\b(\w*e\w*)\b/', $slowo) == true);
             if($kolumny<=$liczba){
             if ($kolumny%$liczba==1){
-                $table .= '<tr><th>$slowo</th>';
+                $table .= '<tr><th>'.$slowo.'</th>';
             } else if ($kolumny%$liczba==0){
                 $table .= '<th>'.$slowo.'</th></tr>';
             } else {
@@ -42,7 +59,7 @@ $table = new tableTool($array);
 // Tests
 echo $array->renderHTMLTable(3);
 echo $array->renderHTMLTable(10);
-// echo $array->renderHTMLTable(5,'id');
+echo $array->renderHTMLTable(5,'id');
 // echo $array->renderCSV(3);
 // echo $array->renderCSV(10);
 // echo $array->renderCSV(5,'id');
